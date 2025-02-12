@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build Project') {
+            steps {
+              echo 'Checking out code from Git'
+              bat 'dotnet build'
+            }
+        }
+
+        stage('Run dotnet test') {
+            steps {
+                echo 'dotnet test'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and tests ran successfully!'
+        }
+        failure {
+            echo 'Something went wrong! Check logs.'
+        }
+    }
+}
